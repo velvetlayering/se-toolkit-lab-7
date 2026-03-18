@@ -346,7 +346,11 @@ Complete these steps:
    Other []: 
    ```
 
-2. When prompted `Is the information correct? [Y/n]`, write `y` and press `Enter`.
+2. When prompted `Is the information correct? [Y/n]`:
+
+   1. Type `y`.
+
+   2. Press `Enter`.
 
    The output should be similar to this:
 
@@ -580,7 +584,9 @@ Complete these steps:
 
 3. When prompted for a password:
 
-   1. Type the password for the user `<user>` (see [Set the password for the user `<user>` (REMOTE)](#set-the-password-for-the-user-user-remote)).
+   1. Type the password for the user `<user>`.
+
+      See [Set the password for the user `<user>` (REMOTE)](#set-the-password-for-the-user-user-remote).
 
       > 🟦 **Note**
       >
@@ -614,7 +620,9 @@ Complete these steps:
 
 2. When prompted for a password:
 
-   1. Type the password for the user `<user>` (see [Set the password for the user `<user>` (REMOTE)](#set-the-password-for-the-user-user-remote)).
+   1. Type the password for the user `<user>`.
+
+      See [Set the password for the user `<user>` (REMOTE)](#set-the-password-for-the-user-user-remote).
 
       > 🟦 **Note**
       >
