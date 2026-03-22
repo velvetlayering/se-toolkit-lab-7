@@ -7,6 +7,7 @@ Uses LLM to decide which backend API calls to make based on user input.
 import json
 from services.llm_client import LLMClient, create_llm_client
 from services.api_client import LMSClient, create_lms_client
+from .tools import TOOL_DEFINITIONS
 
 
 # System prompt for the LLM

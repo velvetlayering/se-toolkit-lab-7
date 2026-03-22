@@ -202,6 +202,10 @@ class LLMClient:
 def create_llm_client() -> LLMClient:
     """Create an LLM client from environment variables."""
     import os
+    from config import load_config
+
+    # Load environment variables from .env.bot.secret
+    load_config()
 
     base_url = os.getenv("LLM_API_BASE_URL", "http://localhost:42005/v1")
     api_key = os.getenv("LLM_API_KEY", "")
