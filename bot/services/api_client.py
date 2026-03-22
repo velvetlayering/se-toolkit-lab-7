@@ -80,6 +80,10 @@ class LMSClient:
 def create_lms_client() -> LMSClient:
     """Create an LMS client from environment variables."""
     import os
+    from config import load_config
+
+    # Load environment variables from .env.bot.secret
+    load_config()
 
     base_url = os.getenv("LMS_API_BASE_URL", "http://localhost:42002")
     api_key = os.getenv("LMS_API_KEY", "")
