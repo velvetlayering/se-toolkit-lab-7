@@ -95,3 +95,75 @@ By the end of this lab, you should be able to say:
 ### Optional
 
 1. [Flutter Web Chatbot](./lab/tasks/optional/task-1.md)
+
+## Deploy
+
+### Prerequisites
+
+- VM with Docker and Docker Compose installed
+- `.env.docker.secret` file with required credentials (see below)
+- Backend already running on the VM
+
+### Required environment variables
+
+Add these to `.env.docker.secret`:
+
+```bash
+# Telegram Bot
+BOT_TOKEN=<your-bot-token-from-botfather>
+
+# LMS API (for bot to access backend)
+LMS_API_KEY=<your-lms-api-key>
+
+# LLM API (for intent routing)
+LLM_API_KEY=<your-llm-api-key>
+LLM_API_MODEL=coder-model
+```
+
+The `LLM_API_BASE_URL` defaults to `http://host.docker.internal:42005/v1` for accessing the Qwen proxy from inside the container.
+
+### Deploy commands
+
+1. **Stop the background bot process** (if running):
+   ```bash
+   cd ~/se-toolkit-lab-7
+   pkill -f "bot.py" 2>/dev/null || true
+   ```
+
+2. **Build and start all services**:
+   ```bash
+   docker compose --env-file .env.docker.secret up --build -d
+   ```
+
+3. **Verify the bot is running**:
+   ```bash
+   docker compose --env-file .env.docker.secret ps bot
+   docker compose --env-file .env.docker.secret logs bot --tail 20
+   ```
+
+4. **Test in Telegram**:
+   - Send `/start` — should see welcome message with inline buttons
+   - Send `/health` — should see backend status
+   - Send "what labs are available?" — should list labs from the backend
+
+### Troubleshooting
+
+| Symptom | Solution |
+|---------|----------|
+| Bot container restarting | Check logs: `docker compose logs bot` |
+| `/health` fails | Ensure `LMS_API_BASE_URL=http://backend:8000` (not localhost) |
+| LLM queries fail | Ensure `extra_hosts` is set for `host.docker.internal` |
+| "BOT_TOKEN is required" | Add `BOT_TOKEN` to `.env.docker.secret` |
+
+### Stop and remove
+
+```bash
+# Stop bot only
+docker compose --env-file .env.docker.secret stop bot
+
+# Stop all services
+docker compose --env-file .env.docker.secret down
+
+# Rebuild and restart
+docker compose --env-file .env.docker.secret up --build -d
+```
