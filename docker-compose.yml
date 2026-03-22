@@ -1,6 +1,5 @@
 services:
   backend:
-    container_name: backend
     build:
       context: .
       dockerfile: backend/Dockerfile
@@ -99,7 +98,6 @@ services:
     restart: unless-stopped
     networks:
       - lms-network
-    container_name: app
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
